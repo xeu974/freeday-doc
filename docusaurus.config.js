@@ -28,6 +28,15 @@ const config = {
                     customCss: require.resolve('./src/css/custom.css')
                 }
             })
+        ],
+        [
+            'redocusaurus',
+            {
+                specs: [{
+                    routePath: '/api/',
+                    specUrl: '/redoc/api.yaml'
+                }]
+            }
         ]
     ],
 
@@ -48,10 +57,9 @@ const config = {
                     label: 'Documentation'
                 },
                 {
-                    type: 'doc',
-                    docId: 'api/api',
                     position: 'left',
-                    label: 'API'
+                    label: 'API',
+                    to: '/api'
                 },
                 {
                     href: 'https://github.com/freeday-app',

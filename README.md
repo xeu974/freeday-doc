@@ -16,3 +16,8 @@ npm run lint
 # run linters with auto fix
 npm run lint-fix
 ```
+
+## Where to edit stuff
+
+* General documentation markdown files are located in `/docs`
+* OpenAPI specification files are located in `/static/redoc`

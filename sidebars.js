@@ -14,12 +14,19 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
     docs: [
-        {
-            type: 'category',
-            label: 'Introduction',
-            items: ['doc/getting-started']
-        }
+        'doc/getting-started',
+        'doc/local-deployment'
     ]
+    // docs: [
+    //     {
+    //         type: 'category',
+    //         label: 'Introduction',
+    //         items: [
+    //             'doc/getting-started',
+    //             'doc/local-deployment'
+    //         ]
+    //     }
+    // ]
 };
 
 module.exports = sidebars;

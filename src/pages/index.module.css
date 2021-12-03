@@ -3,7 +3,8 @@
  * and scoped locally.
  */
 
-/* stylelint-disable-next-line selector-class-pattern */
+/* stylelint-disable selector-class-pattern */
+
 .heroBanner {
     overflow: hidden;
     padding: 4rem 0;
@@ -12,7 +13,6 @@
 }
 
 @media screen and (max-width: 966px) {
-    /* stylelint-disable-next-line selector-class-pattern */
     .heroBanner {
         padding: 2rem;
     }
@@ -22,4 +22,8 @@
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+.homeLogo {
+    width: 200px;
 }

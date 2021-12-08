@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
     title: 'Freeday',
     tagline: 'Dayoff management with chat bots',
-    url: 'https://freeday-app.github.io',
-    baseUrl: '/freeday-doc/',
+    url: 'https://doc.freeday-app.com',
+    baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',

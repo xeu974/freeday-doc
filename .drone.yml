@@ -14,7 +14,6 @@ steps:
     - ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
     - echo "$GITHUB_KEY" > "$HOME/.ssh/id_rsa"
     - chmod 600 $HOME/.ssh/id_rsa
-    - cd deploy
     - npm i
     - npm run deploy
   environment:

@@ -24,7 +24,7 @@ const sidebars = {
                 'bot-slack'
             ]
         },
-        'reverse-proxy'
+        'first-usage'
     ]
     // docs: [
     //     {

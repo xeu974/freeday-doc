@@ -55,18 +55,23 @@ networks:
 ##
 
 # Freeday web front URL
-# E.g. https://web.domain.com/ or http://localhost:8788/
-FRONT_PUBLIC_URL=http://localhost:8788/
+# E.g. https://sub.domain.com/ or http://localhost:8788/
+FRONT_PUBLIC_URL=https://freeday.domain.com/
 
 # Freeday API URL
-# E.g. https://api.domain.com/ or http://localhost:8787/
-API_PUBLIC_URL=http://localhost:8787/
+# E.g. https://sub.domain.com/ or http://localhost:8787/
+API_PUBLIC_URL=https://freeday.domain.com/
 
 # Port on which Freeday API will run
 API_PORT=8787
 
 # Path to logs directory
 API_LOG_DIR=/var/log/freeday
+
+# Enable CORS on API
+# Required if running Freeday on localhost
+# Not recommended in production
+#API_ENABLE_CORS=false
 
 ##
 ## Database
@@ -77,7 +82,7 @@ MONGO_URL=mongodb://freeday-mongo:27017/freeday
 
 # Mongo test database URL
 # This database is used when running tests
-# Not needed in production
+# Not required in production
 #MONGO_TEST_URL=mongodb://freeday-mongo:27017/freeday-test
 
 ##
@@ -101,19 +106,88 @@ SLACK_ACCESS_TOKEN=xoxb-12345678-12345678-abc123abc123abc123abc123
 DIALOGFLOW_ENABLED=false
 
 # Dialogflow configuration
-DIALOGFLOW_KEYFILE=/path/to/keyfile.json
-DIALOGFLOW_ENDPOINT=europe-west1-dialogflow.googleapis.com
-DIALOGFLOW_PROJECT=my-project
-DIALOGFLOW_LOCATION=europe-west1
-DIALOGFLOW_ENVIRONMENT=production
-DIALOGFLOW_USER=my-user
-DIALOGFLOW_SESSION=1234
-DIALOGFLOW_LANGUAGE=en
+#DIALOGFLOW_KEYFILE=/path/to/keyfile.json
+#DIALOGFLOW_ENDPOINT=europe-west1-dialogflow.googleapis.com
+#DIALOGFLOW_PROJECT=my-project
+#DIALOGFLOW_LOCATION=europe-west1
+#DIALOGFLOW_ENVIRONMENT=production
+#DIALOGFLOW_USER=my-user
+#DIALOGFLOW_SESSION=1234
+#DIALOGFLOW_LANGUAGE=en
 ```
 
-## Local deployment
+## Production
 
-When deploying Freeday on a local environment, some additional steps are require so everything works properly.
+### Reverse proxy
+
+When deploying Freeday in production, it is recommended to have a single domain pointing to your server,
+and a reverse proxy distributing the app.
+
+Let's say you're using this configuration:
+
+```shell
+FRONT_PUBLIC_URL=https://freeday.domain.com/
+API_PUBLIC_URL=https://freeday.domain.com/
+```
+
+Then your Nginx reverse proxy configuration would look like this:
+
+```nginx
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name freeday.domain.com;
+
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+
+  server_name freeday.domain.com;
+
+  ssl_certificate /path/to/ssl/fullchain.pem;
+  ssl_certificate_key /path/to/ssl/privkey.pem;
+
+  # web client
+  location / {
+    proxy_pass http://127.0.0.1:8888;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_cache_bypass $http_upgrade;
+  }
+
+  # api
+  location ~ ^/api/ {
+    proxy_pass http://127.0.0.1:8787;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+## Localhost
+
+When running Freeday on localhost, some additional steps are required so everything works properly.
+
+### API configuration
+
+The front and API URLs must point on the correct localhost services, and CORS must be enabled.
+
+```shell
+FRONT_PUBLIC_URL=http://localhost:8788/
+API_PUBLIC_URL=http://localhost:8787/
+API_ENABLE_CORS=true
+```
+
+### Slack bot
 
 In a local environment, the Freeday URL will be something like `http://localhost:8788/`.
 The problem is that Slack API can't reach your Freeday instance through this URL.
@@ -121,7 +195,7 @@ Therefore you need to setup some kind of proxy / tunnel and set the correct URL 
 
 Here we're gonna use [Ngrok](https://ngrok.com/).
 
-### Running Ngrok
+#### Running Ngrok
 
 Start a Ngrok tunnel targetting the API port (default is `8787`).
 
@@ -131,7 +205,7 @@ ngrok http 8787
 
 Then get the tunnel `https` URL in the Ngrok console. It should look like this: `https://1234-12-34-123-12.ngrok.io`.
 
-### Configuring Slack app
+#### Configuring Slack app
 
 Go in to the [Slack apps page](https://api.slack.com/apps) and edit your Freeday app.
 

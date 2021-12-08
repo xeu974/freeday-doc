@@ -8,13 +8,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
     title: 'Freeday',
     tagline: 'Dayoff management with chat bots',
-    url: 'https://doc.freeday-app.com',
-    baseUrl: '/',
+    url: 'https://freeday-app.github.io',
+    baseUrl: '/freeday-doc/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
-    organizationName: 'freeday-app', // Usually your GitHub org/user name.
-    projectName: 'freeday-doc', // Usually your repo name.
+    organizationName: 'freeday-app',
+    projectName: 'freeday-doc',
+    trailingSlash: false,
+    deploymentBranch: 'gh-pages',
 
     presets: [
         [
@@ -55,7 +57,7 @@ const config = {
             items: [
                 {
                     type: 'doc',
-                    docId: 'doc/getting-started',
+                    docId: 'getting-started',
                     position: 'left',
                     label: 'Documentation'
                 },
@@ -79,23 +81,23 @@ const config = {
                     items: [
                         {
                             label: 'Getting started',
-                            to: '/docs/doc/getting-started'
+                            to: '/docs/getting-started'
                         },
                         {
                             label: 'API reference',
-                            to: '/docs/api/api'
+                            to: '/api'
                         }
                     ]
                 },
-                {
-                    title: 'Community',
-                    items: [
-                        {
-                            label: 'Stack Overflow',
-                            href: 'https://stackoverflow.com/questions/tagged/freeday'
-                        }
-                    ]
-                },
+                // {
+                //     title: 'Community',
+                //     items: [
+                //         {
+                //             label: 'Stack Overflow',
+                //             href: 'https://stackoverflow.com/questions/tagged/freeday'
+                //         }
+                //     ]
+                // },
                 {
                     title: 'More',
                     items: [

@@ -17,7 +17,7 @@ const HomepageHeader = () => {
                 <div className={styles.buttons}>
                     <Link
                         className="button button--secondary button--lg"
-                        to="/docs/doc/getting-started"
+                        to="/docs/getting-started"
                     >
                         Get started
                     </Link>

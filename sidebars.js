@@ -14,8 +14,17 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
     docs: [
-        'doc/getting-started',
-        'doc/local-deployment'
+        'getting-started',
+        'deployment',
+        {
+            type: 'category',
+            label: 'Chat bots',
+            collapsible: false,
+            items: [
+                'bot-slack'
+            ]
+        },
+        'reverse-proxy'
     ]
     // docs: [
     //     {

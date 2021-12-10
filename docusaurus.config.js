@@ -107,7 +107,7 @@ const config = {
                         },
                         {
                             label: 'Docker Hub',
-                            href: 'https://hub.docker.com/repository/docker/freedayapp/freeday-api'
+                            href: 'https://hub.docker.com/repository/docker/freedayapp'
                         },
                         {
                             label: 'Official Website',

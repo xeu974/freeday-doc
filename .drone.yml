@@ -1,19 +1,17 @@
 kind: pipeline
 type: docker
-name: freeday-doc-deploy
+name: freeday-doc-ci
+
+trigger:
+  branch:
+  - dev
 
 steps:
-# dependencies
 - name: dependencies
   image: node
   pull: if-not-exists
   commands:
   - npm i
-  when:
-    branch:
-    - master
-    - dev
-# linters
 - name: lint
   image: node
   pull: if-not-exists
@@ -21,21 +19,26 @@ steps:
   - dependencies
   commands:
   - npm run lint
-  when:
-    branch:
-    - master
-    - dev
-# deployment
+
+---
+kind: pipeline
+type: docker
+name: freeday-doc-deploy
+
+trigger:
+  event:
+  - tag
+
+steps:
 - name: deploy
   image: node
   pull: if-not-exists
-  depends_on:
-  - lint
   commands:
     - mkdir -p $HOME/.ssh
     - ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
     - echo "$GITHUB_KEY" > "$HOME/.ssh/id_rsa"
     - chmod 600 $HOME/.ssh/id_rsa
+    - npm i
     - npm run deploy
   environment:
     USE_SSH: true
@@ -43,6 +46,3 @@ steps:
       from_secret: github_user
     GITHUB_KEY:
       from_secret: github_key
-  when:
-    branch:
-    - master

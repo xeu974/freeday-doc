@@ -68,7 +68,7 @@ const HomepageFeatures = () => (
         <div className="container">
             <div className="row">
                 {FeatureList.map((props, idx) => (
-                    <Feature key={idx.toString()} {...props} />
+                    <Feature key={`feature-${idx.toString()}`} {...props} />
                 ))}
             </div>
         </div>

@@ -52,9 +52,9 @@ settings:
   token_rotation_enabled: false
 ```
 
-Then go in the *Basic Information* section. Here you will find various credentials that need to be copied into Freeday's environment file.
-
-Finally, install the app to your Workspace in the *Install App* section.
-
 > Note: The `event_subscriptions` URL must be validated in Slack app configuration.
 > To activate the URL, Freeday must be running and listening to Slack API calls.
+
+Then go in the *Basic Information* section. Here you will find various credentials that need to be copied into Freeday's environment file.
+
+Finally, go in the *Install App* page, and hit the *Install to Workspace* button. A page will open displaying the scopes granted to the Freeday app. You can validate by clicking the *Allow* button. The Bot Access Token (also needed in Freeday's environment file) will then will be displayed to you. 

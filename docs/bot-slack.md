@@ -52,6 +52,8 @@ settings:
   token_rotation_enabled: false
 ```
 
+Then go in the *Basic Information* section. Here you will find various credentials that need to be copied into Freeday's environment file.
+
 Finally, install the app to your Workspace in the *Install App* section.
 
 > Note: The `event_subscriptions` URL must be validated in Slack app configuration.

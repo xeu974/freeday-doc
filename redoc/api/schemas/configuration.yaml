@@ -41,6 +41,6 @@ ConfigurationPublic:
 
 ConfigurationPost:
   allOf:
-    - $ref: '#Configuration'
+    - $ref: '#/Configuration'
     - required:
       - workDays

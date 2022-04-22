@@ -3,7 +3,7 @@
 Job:
   allOf:
     - $ref: './global.yaml#/DocumentId'
-    - $ref: '#JobData'
+    - $ref: '#/JobData'
 
 JobData:
   type: 'object'

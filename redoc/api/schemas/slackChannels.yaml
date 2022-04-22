@@ -3,7 +3,7 @@
 SlackChannel:
   allOf:
     - $ref: './global.yaml#/DocumentId'
-    - $ref: '#SlackChannelData'
+    - $ref: '#/SlackChannelData'
 
 SlackChannelList:
   allOf:
@@ -12,7 +12,7 @@ SlackChannelList:
         slackChannels:
           type: 'array'
           items:
-            $ref: '#SlackChannel'
+            $ref: '#/SlackChannel'
     - $ref: './global.yaml#/Total'
     - $ref: './global.yaml#/Page'
 
@@ -59,7 +59,7 @@ SlackChannelData:
 
 SlackChannelCreate:
   allOf:
-    - $ref: '#SlackChannelData'
+    - $ref: '#/SlackChannelData'
     - required:
       - slackId
       - name

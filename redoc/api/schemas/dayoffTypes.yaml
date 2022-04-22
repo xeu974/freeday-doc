@@ -3,7 +3,7 @@
 DayoffType:
   allOf:
     - $ref: './global.yaml#/DocumentId'
-    - $ref: '#DayoffTypeData'
+    - $ref: '#/DayoffTypeData'
 
 DayoffTypeList:
   allOf:
@@ -12,7 +12,7 @@ DayoffTypeList:
         dayoffTypes:
           type: 'array'
           items:
-            $ref: '#DayoffType'
+            $ref: '#/DayoffType'
     - $ref: './global.yaml#/Total'
     - $ref: './global.yaml#/Page'
 
@@ -47,9 +47,9 @@ DayoffTypeData:
 
 DayoffTypeCreate:
   allOf:
-    - $ref: '#DayoffTypeData'
+    - $ref: '#/DayoffTypeData'
     - required:
       - name
 
 DayoffTypeEdit:
-  $ref: '#DayoffTypeData'
+  $ref: '#/DayoffTypeData'

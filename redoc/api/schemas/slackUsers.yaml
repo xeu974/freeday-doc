@@ -3,7 +3,7 @@
 SlackUser:
   allOf:
     - $ref: './global.yaml#/DocumentId'
-    - $ref: '#SlackUserData'
+    - $ref: '#/SlackUserData'
 
 SlackUserList:
   allOf:
@@ -12,7 +12,7 @@ SlackUserList:
         slackUsers:
           type: 'array'
           items:
-            $ref: '#SlackUser'
+            $ref: '#/SlackUser'
     - $ref: './global.yaml#/Total'
     - $ref: './global.yaml#/Page'
 
@@ -50,7 +50,7 @@ SlackUserData:
 
 SlackUserCreate:
   allOf:
-    - $ref: '#SlackUserData'
+    - $ref: '#/SlackUserData'
     - required:
       - slackId
       - name

@@ -35,8 +35,8 @@ const config = {
             'redocusaurus',
             {
                 specs: [{
-                    routePath: '/api/',
-                    specUrl: '/redoc/api.yaml'
+                    route: '/api/',
+                    spec: './redoc/api.yaml'
                 }]
             }
         ]

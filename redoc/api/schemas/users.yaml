@@ -3,7 +3,7 @@
 User:
   allOf:
     - $ref: './global.yaml#/DocumentId'
-    - $ref: '#UserData'
+    - $ref: '#/UserData'
 
 UserList:
   allOf:
@@ -12,7 +12,7 @@ UserList:
         users:
           type: 'array'
           items:
-            $ref: '#User'
+            $ref: '#/User'
     - $ref: './global.yaml#/Total'
     - $ref: './global.yaml#/Page'
 
@@ -37,16 +37,16 @@ UserData:
 
 UserCreate:
   allOf:
-    - $ref: '#UserData'
-    - $ref: '#UserPassword'
+    - $ref: '#/UserData'
+    - $ref: '#/UserPassword'
     - required:
       - username
       - password
 
 UserEdit:
   allOf:
-    - $ref: '#UserData'
-    - $ref: '#UserPassword'
+    - $ref: '#/UserData'
+    - $ref: '#/UserPassword'
 
 UserPassword:
   type: 'object'

@@ -15,7 +15,7 @@ version: '3'
 
 services:
   freeday-api:
-    image: freedayapp/freeday-api
+    image: freedayapp/freeday-api:latest
     container_name: freeday-api
     restart: always
     env_file:
@@ -25,7 +25,7 @@ services:
     ports:
       - 8787:8787
   freeday-web:
-    image: freedayapp/freeday-web
+    image: freedayapp/freeday-web:latest
     container_name: freeday-web
     restart: always
     env_file:
@@ -156,9 +156,6 @@ server {
     proxy_pass http://127.0.0.1:8888;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_cache_bypass $http_upgrade;
   }
 
   # api
@@ -166,9 +163,6 @@ server {
     proxy_pass http://127.0.0.1:8787;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_cache_bypass $http_upgrade;
   }
 }
 ```

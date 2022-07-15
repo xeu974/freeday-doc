@@ -4,9 +4,9 @@
 
 When running Freeday for the first time, you need to go on the Welcome page so you can create the first administrator account.
 
-Run `docker logs freeday-api` to display Freeday API logs and get the Welcome URL from there.
+Run `docker logs freeday` to display Freeday logs and get the Welcome URL from there.
 
-> Note: The Welcome URL will appear in the API logs only if there is no user in database
+> Note: The Welcome URL will appear in logs only if there is no user in database
 
 ## Slack bot
 

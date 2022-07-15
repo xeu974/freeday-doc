@@ -14,9 +14,9 @@ Edit configuration as you wish then run the whole thing using `docker-compose up
 version: '3'
 
 services:
-  freeday-api:
-    image: freedayapp/freeday-api:latest
-    container_name: freeday-api
+  freeday:
+    image: freedayapp/freeday:latest
+    container_name: freeday
     restart: always
     env_file:
       - .env
@@ -24,19 +24,9 @@ services:
       - freeday-network
     ports:
       - 8787:8787
-  freeday-web:
-    image: freedayapp/freeday-web:latest
-    container_name: freeday-web
-    restart: always
-    env_file:
-      - .env
-    networks:
-      - freeday-network
-    ports:
-      - 8788:8788
-  freeday-mongo:
+  mongo:
     image: mongo
-    container_name: freeday-mongo
+    container_name: mongo
     restart: always
     command: mongod --quiet --logpath /dev/null
     networks:
@@ -54,31 +44,25 @@ networks:
 ## General
 ##
 
-# Freeday web front URL
-# E.g. https://sub.domain.com/ or http://localhost:8788/
-FRONT_PUBLIC_URL=https://freeday.domain.com/
+# Environment (prod or dev)
+# If prod router will serve the web client build
+ENVIRONMENT=prod
 
-# Freeday API URL
-# E.g. https://sub.domain.com/ or http://localhost:8787/
-API_PUBLIC_URL=https://freeday.domain.com/
+# Public URL on which Freeday is reachable
+PUBLIC_URL=https://freeday.domain.com/
 
 # Port on which Freeday API will run
-API_PORT=8787
+PORT=8787
 
 # Path to logs directory
-API_LOG_DIR=/var/log/freeday
-
-# Enable CORS on API
-# Required if running Freeday on localhost
-# Not recommended in production
-#API_ENABLE_CORS=false
+LOG_DIR=/var/log/freeday
 
 ##
 ## Database
 ##
 
 # Mongo database URL
-MONGO_URL=mongodb://freeday-mongo:27017/freeday
+MONGO_URL=mongodb://mongo:27017/freeday
 
 # Mongo test database URL
 # This database is used when running tests
@@ -126,8 +110,7 @@ and a reverse proxy distributing the app.
 Let's say you're using this configuration:
 
 ```shell
-FRONT_PUBLIC_URL=https://freeday.domain.com/
-API_PUBLIC_URL=https://freeday.domain.com/
+PUBLIC_URL=https://freeday.domain.com/
 ```
 
 Then your Nginx reverse proxy configuration would look like this:
@@ -151,15 +134,7 @@ server {
   ssl_certificate /path/to/ssl/fullchain.pem;
   ssl_certificate_key /path/to/ssl/privkey.pem;
 
-  # web client
   location / {
-    proxy_pass http://127.0.0.1:8888;
-    proxy_http_version 1.1;
-    proxy_set_header Host $host;
-  }
-
-  # api
-  location ~ ^/api/ {
     proxy_pass http://127.0.0.1:8787;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
@@ -171,19 +146,9 @@ server {
 
 When running Freeday on localhost, some additional steps are required so everything works properly.
 
-### API configuration
-
-The front and API URLs must point on the correct localhost services, and CORS must be enabled.
-
-```shell
-FRONT_PUBLIC_URL=http://localhost:8788/
-API_PUBLIC_URL=http://localhost:8787/
-API_ENABLE_CORS=true
-```
-
 ### Slack bot
 
-In a local environment, the Freeday URL will be something like `http://localhost:8788/`.
+In a local environment, the Freeday API URL will be something like `http://localhost:8787/`.
 The problem is that Slack API can't reach your Freeday instance through this URL.
 Therefore you need to setup some kind of proxy / tunnel and set the correct URL in the Slack app manifest so it ca communicates with your Freeday instance.
 

@@ -6,7 +6,7 @@ Freeday can be easily deployed using Docker images.
 
 You can find below an example of `docker-compose.yaml` file and its `.env` companion.
 
-Edit configuration as you wish then run the whole thing using `docker-compose up -d`.
+Edit configuration as you wish then run the whole thing using `docker compose up -d`.
 
 ### docker-compose.yml
 

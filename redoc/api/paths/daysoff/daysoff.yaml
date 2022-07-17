@@ -64,6 +64,9 @@ post:
   summary: 'Creates a new dayoff'
   description: |
     * If conflicts with other daysoff are detected an error is thrown
+    * This endpoint can be used to create a dayoff for one or multiple users
+      * Send a Slack user ID as a string in `slackUserId` to create a dayoff for one user
+      * Send an array of Slack user ID in `slackUserId` to create a dayoff for multiple users
   requestBody:
     required: true
     content:

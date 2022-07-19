@@ -20,7 +20,7 @@ get:
       in: 'query'
       style: 'form'
       explode: false
-      description: 'e.g. `?type=aaa&type=bbb&type=ccc`'
+      description: 'e.g. `?type=aaa&type=bbb&type=ccc` or `?type[]=aaa&type[]=bbb&type[]=ccc`'
       schema:
         type : 'array'
         items:
@@ -30,7 +30,7 @@ get:
       in: 'query'
       style: 'form'
       explode: false
-      description: 'e.g. `?slackUser=aaa&slackUser=bbb`'
+      description: 'e.g. `?slackUser=aaa&slackUser=bbb` or `?slackUser[]=aaa&slackUser[]=bbb`'
       schema:
         type : 'array'
         items:

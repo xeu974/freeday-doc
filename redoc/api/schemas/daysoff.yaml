@@ -80,23 +80,19 @@ DayoffData:
 DayoffCreate:
   allOf:
     - $ref: '#/DayoffEdit'
-    - oneOf:
-      - type: 'object'
-        properties:
-          slackUserId:
-            description: "Slack user ID"
-            type: 'string'
-            format: 'slack-id'
-            example: 'UGJ7AVX32'
-      - type: 'object'
-        properties:
-          slackUserId:
-            description: "Mutiple Slack user IDs"
-            type: 'array'
-            items:
-              type: 'string'
+    - type: 'object'
+      properties:
+        slackUserId:
+          description: "Slack user ID or list of Slack user IDs"
+          oneOf:
+            - type: 'string'
               format: 'slack-id'
               example: 'UGJ7AVX32'
+            - type: 'array'
+              items:
+                type: 'string'
+                format: 'slack-id'
+                example: 'UGJ7AVX32'
     - required:
       - type
       - slackUserId

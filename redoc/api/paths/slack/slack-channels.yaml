@@ -6,6 +6,13 @@ get:
   summary: 'Gets the list Slack channels'
   description: |
     * Calling this method updates the Slack channel list in database by synchronizing with Slack API (max. one time per minute)
+  parameters:
+    - name: 'memberOnly'
+      in: 'query'
+      schema:
+        type : 'boolean'
+    - $ref: '../../schemas/paginate.yaml#/Page'
+    - $ref: '../../schemas/paginate.yaml#/Limit'
   responses:
     200:
       content:

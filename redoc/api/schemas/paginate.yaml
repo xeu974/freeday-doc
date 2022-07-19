@@ -1,0 +1,17 @@
+# Paginate
+
+Page:
+  name: 'page'
+  in: 'query'
+  schema:
+    oneOf:
+      - type : 'number'
+      - type : 'string'
+        enum: ['all']
+
+Limit:
+  name: 'limit'
+  in: 'query'
+  schema:
+    type : 'number'
+

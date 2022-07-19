@@ -20,6 +20,7 @@ get:
       in: 'query'
       style: 'form'
       explode: false
+      description: 'e.g. `?type=aaa&type=bbb&type=ccc`'
       schema:
         type : 'array'
         items:
@@ -29,6 +30,7 @@ get:
       in: 'query'
       style: 'form'
       explode: false
+      description: 'e.g. `?slackUser=aaa&slackUser=bbb`'
       schema:
         type : 'array'
         items:
@@ -43,8 +45,9 @@ get:
       in: 'query'
       schema:
         type : 'string'
-        format: 'slack-id'
         enum: ['asc','desc']
+    - $ref: '../../schemas/paginate.yaml#/Page'
+    - $ref: '../../schemas/paginate.yaml#/Limit'
   responses:
     200:
       content:

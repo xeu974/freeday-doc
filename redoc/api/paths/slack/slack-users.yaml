@@ -11,6 +11,8 @@ get:
       in: 'query'
       schema:
         type : 'boolean'
+    - $ref: '../../schemas/paginate.yaml#/Page'
+    - $ref: '../../schemas/paginate.yaml#/Limit'
   responses:
     200:
       content:

@@ -5,6 +5,9 @@ get:
     - 'Users'
   summary: 'Gets the list of users'
   description: ''
+  parameters:
+    - $ref: '../../schemas/paginate.yaml#/Page'
+    - $ref: '../../schemas/paginate.yaml#/Limit'
   responses:
     200:
       content:

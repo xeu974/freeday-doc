@@ -54,6 +54,9 @@ PUBLIC_URL=https://freeday.domain.com/
 # Port on which Freeday API will run
 PORT=8787
 
+# Timezone
+TIMEZONE=Europe/Paris
+
 # Path to logs directory
 LOG_DIR=/var/log/freeday
 
